@@ -1,0 +1,5 @@
+{
+  "name": "Hidden Reward Claim",
+  "description": "A CTF-style reward claim system for a college event using Supabase.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOUND SOMETHING HIDDEN?</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            terminal: {
+              black: '#0a0a0a',
+              green: '#00ff41',
+              red: '#ff0033',
+              dim: '#008F11'
+            }
+          },
+          animation: {
+            'cursor-blink': 'blink 1s step-end infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'sphere-ring': 'sphere-ring 80s linear infinite',
+            'sphere-ring-reverse': 'sphere-ring-reverse 100s linear infinite',
+          },
+          keyframes: {
+            blink: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0' },
+            },
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            'sphere-ring': {
+              '0%': { transform: 'rotateY(var(--base-rotate-y, 0deg)) rotateX(var(--base-rotate-x, 0deg)) rotateZ(0deg)' },
+              '100%': { transform: 'rotateY(var(--base-rotate-y, 0deg)) rotateX(var(--base-rotate-x, 0deg)) rotateZ(360deg)' },
+            },
+            'sphere-ring-reverse': {
+              '0%': { transform: 'rotateX(var(--base-rotate-x, 0deg)) rotateZ(var(--base-rotate-z, 0deg)) rotateY(0deg)' },
+              '100%': { transform: 'rotateX(var(--base-rotate-x, 0deg)) rotateZ(var(--base-rotate-z, 0deg)) rotateY(-360deg)' },
+            }
+          }
+        },
+      },
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #00ff41;
+    }
+
+    /* Custom Scrollbar for Terminal Feel */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0a0a0a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #008F11;
+      border-radius: 0px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #00ff41;
+    }
+  </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@^2.87.3"
+  }
+}
+</script>
+  <link rel="stylesheet" href="/index.css">
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
+</html>
