@@ -7,7 +7,7 @@ import { Lock, Unlock, AlertTriangle, CheckCircle, ShieldAlert, Terminal } from 
 
 // In this environment, we cannot import images as modules. 
 // We reference the file path directly as a string.
-const logo = './logo.png';
+const logo = '/logo.png';
 
 const REWARD_LIMIT = 25;
 
