@@ -3,7 +3,8 @@ import { supabase } from './services/supabase';
 import { sha256 } from './utils/crypto';
 import { AppState, FormData } from './types';
 import { TerminalInput } from './components/TerminalInput';
-import { Lock, Unlock, AlertTriangle, CheckCircle, ShieldAlert, Terminal } from 'lucide-react';
+import { ShareCard } from './components/ShareCard';
+import { Lock, Unlock, AlertTriangle, ShieldAlert } from 'lucide-react';
 
 // In this environment, we cannot import images as modules. 
 // We reference the file path directly as a string.
@@ -34,6 +35,7 @@ const App: React.FC = () => {
     email: ''
   });
   const [formError, setFormError] = useState('');
+  const [userRank, setUserRank] = useState<number>(1);
 
   // Initial check for reward availability
   useEffect(() => {
@@ -137,6 +139,8 @@ const App: React.FC = () => {
           setFormError(`DB ERROR: ${error.message}`);
         }
       } else {
+        // Calculate rank (current count + 1 since we just inserted)
+        setUserRank((count ?? 0) + 1);
         setAppState(AppState.SUCCESS);
       }
     } catch (err) {
@@ -194,18 +198,7 @@ const App: React.FC = () => {
   if (appState === AppState.SUCCESS) {
     return (
       <Layout>
-        {renderHeader()}
-        <div className="border border-terminal-green p-8 max-w-md w-full text-center animate-fade-in bg-terminal-black/90 backdrop-blur">
-          <CheckCircle size={64} className="mx-auto text-terminal-green mb-4" />
-          <h2 className="text-3xl font-bold mb-4">CLAIM SUCCESSFUL</h2>
-          <p className="text-lg mb-6">
-            Congratulations, Agent <span className="font-bold text-white">{formData.name}</span>.
-          </p>
-          <div className="text-xs text-terminal-dim border-t border-terminal-dim/30 pt-4">
-            CONFIRMATION LOGGED.<br />
-            PLEASE AWAIT FURTHER INSTRUCTIONS.
-          </div>
-        </div>
+        <ShareCard name={formData.name} rank={userRank} />
       </Layout>
     );
   }

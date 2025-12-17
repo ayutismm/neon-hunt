@@ -8,13 +8,15 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Press+Start+2P&display=swap"
+    rel="stylesheet">
   <script>
     tailwind.config = {
       theme: {
         extend: {
           fontFamily: {
             mono: ['"JetBrains Mono"', 'monospace'],
+            pixel: ['"Press Start 2P"', 'cursive'],
           },
           colors: {
             terminal: {
@@ -22,13 +24,35 @@
               green: '#00ff41',
               red: '#ff0033',
               dim: '#008F11'
+            },
+            arcade: {
+              pink: '#ff00ff',
+              cyan: '#00ffff',
+              yellow: '#ffff00',
+              orange: '#ff6600',
+              blue: '#1a1a2e',
             }
           },
           animation: {
             'cursor-blink': 'blink 1s step-end infinite',
             'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
             'sphere-ring': 'sphere-ring 80s linear infinite',
             'sphere-ring-reverse': 'sphere-ring-reverse 100s linear infinite',
+            'float-particle': 'floatParticle 8s ease-in-out infinite',
+            'border-glow': 'borderGlow 3s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+            'pulse-subtle': 'pulseSubtle 2s ease-in-out infinite',
+            'spin-slow': 'spin 8s linear infinite',
+            'spin-slow-reverse': 'spinReverse 10s linear infinite',
+            'ping-slow': 'pingSlow 3s ease-out infinite',
+            'logo-pulse': 'logoPulse 2s ease-in-out infinite',
+            'corner-pulse': 'cornerPulse 2s ease-in-out infinite',
+            'shimmer': 'shimmer 2s ease-in-out infinite',
+            'gradient-shift': 'gradientShift 10s ease-in-out infinite',
+            'pixel-blink': 'pixelBlink 1.5s ease-in-out infinite',
+            'arcade-flash': 'arcadeFlash 2s ease-in-out infinite',
+            'arcade-blink': 'arcadeBlink 0.8s step-end infinite',
           },
           keyframes: {
             blink: {
@@ -39,6 +63,10 @@
               '0%': { opacity: '0', transform: 'translateY(10px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
             'sphere-ring': {
               '0%': { transform: 'rotateY(var(--base-rotate-y, 0deg)) rotateX(var(--base-rotate-x, 0deg)) rotateZ(0deg)' },
               '100%': { transform: 'rotateY(var(--base-rotate-y, 0deg)) rotateX(var(--base-rotate-x, 0deg)) rotateZ(360deg)' },
@@ -46,7 +74,62 @@
             'sphere-ring-reverse': {
               '0%': { transform: 'rotateX(var(--base-rotate-x, 0deg)) rotateZ(var(--base-rotate-z, 0deg)) rotateY(0deg)' },
               '100%': { transform: 'rotateX(var(--base-rotate-x, 0deg)) rotateZ(var(--base-rotate-z, 0deg)) rotateY(-360deg)' },
-            }
+            },
+            floatParticle: {
+              '0%, 100%': { transform: 'translateY(0) translateX(0)', opacity: '0.6' },
+              '25%': { transform: 'translateY(-30px) translateX(10px)', opacity: '1' },
+              '50%': { transform: 'translateY(-50px) translateX(-10px)', opacity: '0.8' },
+              '75%': { transform: 'translateY(-30px) translateX(15px)', opacity: '1' },
+            },
+            borderGlow: {
+              '0%, 100%': { boxShadow: '0 0 20px rgba(0, 255, 65, 0.3), inset 0 0 20px rgba(0, 255, 65, 0.1)' },
+              '50%': { boxShadow: '0 0 40px rgba(0, 255, 65, 0.6), inset 0 0 40px rgba(0, 255, 65, 0.2)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { boxShadow: '0 0 10px rgba(0, 255, 65, 0.3)', opacity: '0.8' },
+              '50%': { boxShadow: '0 0 25px rgba(0, 255, 65, 0.6)', opacity: '1' },
+            },
+            pulseSubtle: {
+              '0%, 100%': { opacity: '0.3' },
+              '50%': { opacity: '0.6' },
+            },
+            spinReverse: {
+              '0%': { transform: 'rotate(0deg)' },
+              '100%': { transform: 'rotate(-360deg)' },
+            },
+            pingSlow: {
+              '0%': { transform: 'scale(1)', opacity: '0.5' },
+              '75%, 100%': { transform: 'scale(1.5)', opacity: '0' },
+            },
+            logoPulse: {
+              '0%, 100%': { transform: 'scale(1)' },
+              '50%': { transform: 'scale(1.08)' },
+            },
+            cornerPulse: {
+              '0%, 100%': { opacity: '0.6' },
+              '50%': { opacity: '1' },
+            },
+            shimmer: {
+              '0%': { opacity: '0.3' },
+              '50%': { opacity: '1' },
+              '100%': { opacity: '0.3' },
+            },
+            gradientShift: {
+              '0%, 100%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+            },
+            pixelBlink: {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0.3' },
+            },
+            arcadeFlash: {
+              '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+              '50%': { opacity: '0.9', transform: 'scale(1.02)' },
+            },
+            arcadeBlink: {
+              '0%, 50%': { opacity: '1' },
+              '50.01%, 100%': { opacity: '0.5' },
+            },
           }
         },
       },
@@ -74,6 +157,96 @@
 
     ::-webkit-scrollbar-thumb:hover {
       background: #00ff41;
+    }
+
+    /* Glitch text effect */
+    .glitch-text {
+      position: relative;
+    }
+
+    .glitch-text::before,
+    .glitch-text::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .glitch-text::before {
+      animation: glitch-1 2s infinite linear alternate-reverse;
+      clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+      transform: translateX(-2px);
+      color: #00ff41;
+    }
+
+    .glitch-text::after {
+      animation: glitch-2 3s infinite linear alternate-reverse;
+      clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+      transform: translateX(2px);
+      color: #00ff41;
+    }
+
+    @keyframes glitch-1 {
+      0% {
+        transform: translateX(-2px);
+      }
+
+      20% {
+        transform: translateX(2px);
+      }
+
+      40% {
+        transform: translateX(-1px);
+      }
+
+      60% {
+        transform: translateX(1px);
+      }
+
+      80% {
+        transform: translateX(-2px);
+      }
+
+      100% {
+        transform: translateX(2px);
+      }
+    }
+
+    @keyframes glitch-2 {
+      0% {
+        transform: translateX(2px);
+      }
+
+      20% {
+        transform: translateX(-2px);
+      }
+
+      40% {
+        transform: translateX(1px);
+      }
+
+      60% {
+        transform: translateX(-1px);
+      }
+
+      80% {
+        transform: translateX(2px);
+      }
+
+      100% {
+        transform: translateX(-2px);
+      }
+    }
+
+    /* Scan lines background */
+    .bg-scanlines {
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 255, 65, 0.03) 2px,
+          rgba(0, 255, 65, 0.03) 4px);
     }
   </style>
   <script type="importmap">
