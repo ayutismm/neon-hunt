@@ -49,22 +49,32 @@ export const ShareCard: React.FC<ShareCardProps> = ({ name, rank }) => {
         try {
             const htmlToImage = await import('https://esm.sh/html-to-image@1.11.11');
 
-            // Wait a bit for fonts to be fully loaded
-            await document.fonts.ready;
+            // Fetch and embed font as base64 to bypass CORS issues
+            const fontResponse = await fetch('https://fonts.gstatic.com/s/pressstart2p/v15/e3t4euO8T-267oIAQAu6jDQyK3nVivM.woff2');
+            const fontBuffer = await fontResponse.arrayBuffer();
+            const fontBase64 = btoa(String.fromCharCode(...new Uint8Array(fontBuffer)));
+
+            // Create font-face CSS with embedded base64 font
+            const fontCSS = `
+                @font-face {
+                    font-family: 'Press Start 2P';
+                    src: url(data:font/woff2;base64,${fontBase64}) format('woff2');
+                    font-weight: normal;
+                    font-style: normal;
+                }
+            `;
 
             const dataUrl = await htmlToImage.toPng(cardRef.current, {
                 quality: 1,
-                pixelRatio: 3,
+                pixelRatio: 4,
                 backgroundColor: '#0f0f0f',
                 cacheBust: true,
-                includeQueryParams: true,
-                fetchRequestInit: {
-                    mode: 'cors',
-                    cache: 'no-cache',
+                skipAutoScale: true,
+                fontEmbedCSS: fontCSS,
+                style: {
+                    transform: 'scale(1)',
+                    transformOrigin: 'top left',
                 },
-                fontEmbedCSS: `
-                    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-                `,
             });
 
             const link = document.createElement('a');
@@ -89,6 +99,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ name, rank }) => {
                 style={{
                     backgroundColor: '#0f0f0f',
                     border: '8px solid #39ff14',
+                    borderRadius: '24px',
                     boxShadow: 'inset 0 0 0 4px #0f0f0f, inset 0 0 0 8px #1a4d1a',
                     imageRendering: 'pixelated',
                 }}
@@ -230,7 +241,7 @@ export const ShareCard: React.FC<ShareCardProps> = ({ name, rank }) => {
                                         fontSize: '11px',
                                     }}
                                 >
-                                    +1000 XP
+                                    +100 XP
                                 </p>
                             </div>
                         </div>
