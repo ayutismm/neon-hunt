@@ -10,7 +10,7 @@ import { Lock, Unlock, AlertTriangle, ShieldAlert } from 'lucide-react';
 // We reference the file path directly as a string.
 const logo = '/logo.png';
 
-const REWARD_LIMIT = 25;
+const REWARD_LIMIT = 50;
 
 // Layout component moved outside App to prevent recreation on state changes
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
